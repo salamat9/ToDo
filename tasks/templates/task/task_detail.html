@@ -1,0 +1,6 @@
+<h1>Detail page</h1>
+<p>{{ task.title }}</p>
+{% for tag in task.tags.all %}
+{#    <p>{{ tag.pk }}, {{ tag.name }}</p>#}
+    <a href="{% url 'tag_detail' tag.pk %}">{{ tag.name }}</a>
+{% endfor %}

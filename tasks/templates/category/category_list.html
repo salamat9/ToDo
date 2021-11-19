@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Category list{% endblock %}
+
+{% block content %}
+    {% for category in categories %}
+        <div class="card shadow-sm mt-3" style="max-width: 400px">
+            <p>{{ category.name }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

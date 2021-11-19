@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    ToDo
+{% endblock %}
+
+{% block content %}
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-center">
+            <a class="p-3 text-dark text-decoration-none" href="{% url 'task_list' %}">All tasks</a>
+            {% for category in categories  %}
+                <a class="p-3 text-dark text-decoration-none" href="{% url 'task_list_by_category' category.pk %}">{{ category.name }}</a>
+            {% endfor %}
+        </nav>
+    </div>
+    <div class="text-center">
+      <button type="button" class="btn btn-dark me-2">
+          <a class="text-decoration-none text-light" href="{% url 'task_create' %}">Add Task</a>
+      </button>
+      <button type="button" class="btn btn-dark">
+          <a class="text-decoration-none text-light" href="{% url 'create_category' %}">Add Category</a>
+      </button>
+    </div>
+    {% for task in tasks %}
+        <div class="card shadow-sm mt-3">
+            <div class="card-body">
+              <h3 class="card-title text-center">{{ task.title }}</h3>
+              <p class="card-text">{{ task.description }}</p>
+{#              <p class="text-danger">Category: {{ task.category }}</p>#}
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                      <a class="text-decoration-none text-primary" href="{% url 'task_detail' task.pk %}">View</a>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                      <a class="text-decoration-none text-success" href="{% url 'task_detail' task.pk %}">Done</a>
+                  </button>
+                </div>
+                <small class="text-muted">{{ task.deadline }}</small>
+              </div>
+            </div>
+        </div>
+        <div class="mb-3">
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">{{ category.name }}</h1>
+    <button type="submit" class="btn btn-dark form-control">
+        <a class="text-light text-decoration-none" href="{% url 'task_create' %}">Add Task</a>
+    </button>
+    {% for task in tasks %}
+        <div class="card shadow-sm mt-3">
+            <div class="card-body">
+              <h3 class="card-title text-center">{{ task.title }}</h3>
+              <p class="card-text">{{ task.description }}</p>
+{#              <p class="text-danger">Category: {{ task.category }}</p>#}
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                      <a class="text-decoration-none text-primary" href="{% url 'task_detail' task.pk %}">View</a>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                      <a class="text-decoration-none text-success" href="{% url 'task_detail' task.pk %}">Done</a>
+                  </button>
+                </div>
+                <small class="text-muted">{{ task.deadline }}</small>
+              </div>
+            </div>
+        </div>
+        <div class="mb-3">
+        </div>
+    {% endfor %}
+{% endblock %}
